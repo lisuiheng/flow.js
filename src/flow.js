@@ -948,6 +948,7 @@
       this._prevProgress = 0;
       // modify by lee start
       if (this.flowObj.opts.justOneChunk) {
+        this.chunkSize = evalOpts(this.flowObj.opts.chunkSize, this);
         this.chunks.push(
             new Flow.FlowChunk(this.flowObj, this, 0)
         );
