@@ -10,6 +10,7 @@
 
 # Editors
 .idea
+yarn.lock
 
 # Tests
 sauce_connect.log

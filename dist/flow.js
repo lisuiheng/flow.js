@@ -78,6 +78,9 @@
      * @type {Object}
      */
     this.defaults = {
+      // modify by lee start
+      justOneChunk: false,
+      // modify by lee end
       chunkSize: 1024 * 1024,
       forceChunkSize: false,
       simultaneousUploads: 3,
@@ -750,7 +753,7 @@
      * @type {string}
      */
     this.uniqueIdentifier = (uniqueIdentifier === undefined ? flowObj.generateUniqueIdentifier(file) : uniqueIdentifier);
-                        
+
     /**
      * Size of Each Chunk
      * @type {number}
@@ -943,16 +946,24 @@
       this.error = false;
       // Rebuild stack of chunks from file
       this._prevProgress = 0;
-      var round = this.flowObj.opts.forceChunkSize ? Math.ceil : Math.floor;
-      this.chunkSize = evalOpts(this.flowObj.opts.chunkSize, this);
-      var chunks = Math.max(
-        round(this.size / this.chunkSize), 1
-      );
-      for (var offset = 0; offset < chunks; offset++) {
+      // modify by lee start
+      if (this.flowObj.opts.justOneChunk) {
         this.chunks.push(
-          new FlowChunk(this.flowObj, this, offset)
+            new Flow.FlowChunk(this.flowObj, this, 0)
         );
+      } else {
+        var round = this.flowObj.opts.forceChunkSize ? Math.ceil : Math.floor;
+        this.chunkSize = evalOpts(this.flowObj.opts.chunkSize, this);
+        var chunks = Math.max(
+            round(this.size / this.chunkSize), 1
+        );
+        for (var offset = 0; offset < chunks; offset++) {
+          this.chunks.push(
+              new FlowChunk(this.flowObj, this, offset)
+          );
+        }
       }
+      // modify by lee end
     },
 
     /**
@@ -1629,7 +1640,7 @@
    * Library version
    * @type {string}
    */
-  Flow.version = '2.14.0';
+  Flow.version = '<%= version %>';
 
   if ( typeof module === "object" && module && typeof module.exports === "object" ) {
     // Expose Flow as module.exports in loaders that implement the Node

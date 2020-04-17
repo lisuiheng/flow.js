@@ -1,5 +1,5 @@
 {
-  "name": "@flowjs/flow.js",
+  "name": "@ka-flowjs/flow.js",
   "version": "2.14.0",
   "description": "Flow.js library implements html5 file upload and provides multiple simultaneous, stable, fault tolerant and resumable uploads.",
   "main": "src/flow.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/flowjs/flow.js.git"
+    "url": "git@github.com:lisuiheng/flow.js.git"
   },
   "keywords": [
     "flow.js",
